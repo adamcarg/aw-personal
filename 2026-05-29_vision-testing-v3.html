@@ -608,7 +608,7 @@ body {
 </div>
 
 <div class="reviewer-main">
-<div class="feature-panel">
+<div class="feature-panel" id="feature-panel" style="visibility:hidden">
   <div class="annotation-card">
     <div class="annotation-label">Feature highlight</div>
     <div class="annotation-text" id="annotation-text">→ Intent detected on "inspect" — PPSR surfaces as the upstream hook to convert curiosity into commitment · → 5-step journey introduced at the moment of buyer intent</div>
@@ -4555,6 +4555,7 @@ body {
 <div class="demo-controls" id="demo-controls">
   <div class="demo-ctrl-label">Demo controls</div>
   <button class="demo-ctrl-btn" id="dc-toggle-pills" onclick="togglePills()" style="display:block">Show archived navigation pills</button>
+  <button class="demo-ctrl-btn" id="dc-toggle-highlights" onclick="toggleHighlights()" style="display:block">Show WIP feature highlights</button>
   <button class="demo-ctrl-btn" id="dc-accept-offer" onclick="acceptOffer()">Demo: Priya accepts offer →</button>
   <button class="demo-ctrl-btn" id="dc-verify-id" onclick="completeIdVerify()">Demo: ID verification complete →</button>
   <button class="demo-ctrl-btn" id="dc-confirm-handover" onclick="s8confirm()">Demo: Priya confirms handover →</button>
@@ -4680,6 +4681,14 @@ function updateDemoControls() {
   if (dcVerify)   dcVerify.style.display   = ([24,25].indexOf(current) !== -1 && !idVerifyDone) ? 'block' : 'none';
   if (dcHandover) dcHandover.style.display = (current === 10) ? 'block' : 'none';
   if (dcReceipt)  dcReceipt.style.display  = (current === 13) ? 'block' : 'none';
+}
+function toggleHighlights() {
+  var panel = document.getElementById('feature-panel');
+  var btn   = document.getElementById('dc-toggle-highlights');
+  if (!panel) return;
+  var visible = panel.style.visibility !== 'hidden';
+  panel.style.visibility = visible ? 'hidden' : 'visible';
+  btn.textContent = visible ? 'Show WIP feature highlights' : 'Hide WIP feature highlights';
 }
 function togglePills() {
   var wrap = document.getElementById('pills-wrap');
