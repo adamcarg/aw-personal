@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payments Strategy — One Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #ECEEF2;
+      color: #111827;
+      padding: 48px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .eyebrow {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9CA3AF;
+      margin-bottom: 10px;
+    }
+
+    /* ── 1. Mission ── */
+    .mission {
+      background: linear-gradient(150deg, #0D1B2E 0%, #162944 60%, #1a2f4e 100%);
+      border-radius: 20px;
+      padding: 48px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .mission::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; right: -60px;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(29,78,216,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .mission .eyebrow { color: #3D5A7A; margin-bottom: 14px; }
+    .mission-text {
+      font-size: 27px;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.3;
+      max-width: 680px;
+      margin: 0 auto 12px;
+      letter-spacing: -0.3px;
+    }
+    .mission-sub {
+      font-size: 14px;
+      color: #5A7A9A;
+      font-style: italic;
+    }
+
+    /* ── 2. Proof points ── */
+    .proof-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .proof {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 24px;
+      text-align: center;
+      transition: box-shadow 0.18s ease;
+    }
+    .proof:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .proof-val {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0D1B2E;
+      line-height: 1;
+      letter-spacing: -0.5px;
+      margin-bottom: 5px;
+    }
+    .proof-lbl  { font-size: 12px; color: #9CA3AF; font-weight: 500; }
+    .proof-note { font-size: 11px; color: #059669; font-weight: 600; margin-top: 5px; }
+
+    /* ── 3. Problems ── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .problem {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 26px;
+      border-left: 3px solid #FCA5A5;
+      transition: box-shadow 0.18s ease;
+    }
+    .problem:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    .problem-num   { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: #EF4444; margin-bottom: 6px; }
+    .problem-title { font-size: 14px; font-weight: 700; color: #111827; margin-bottom: 8px; line-height: 1.3; }
+    .problem-body  { font-size: 13px; color: #6B7280; line-height: 1.6; }
+
+    /* ── 4. Bets ── */
+    .bets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 0.72fr;
+      gap: 10px;
+    }
+    .bet-card {
+      border-radius: 16px;
+      padding: 30px 32px;
+    }
+    .bet-card.val { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+    .bet-card.def { background: linear-gradient(135deg, #065f46 0%, #059669 100%); }
+    .bet-card.exp {
+      background: linear-gradient(135deg, #3b1f6e 0%, #6d28d9 100%);
+      opacity: 0.6;
+    }
+    .bet-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .bet-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+    .bet-name { font-size: 24px; font-weight: 800; color: white; line-height: 1.1; letter-spacing: -0.3px; }
+    .bet-tagline { font-size: 13.5px; color: rgba(255,255,255,0.82); line-height: 1.6; }
+    .bet-parked-badge {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.8);
+    }
+
+    /* ── 5. Execute — Strategy phases ── */
+    .phases-grid {
+      display: grid;
+      grid-template-columns: 1fr 36px 1fr 36px 1fr;
+    }
+    .ph-hdr {
+      background: #0D1B2E;
+      padding: 18px 22px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      border-radius: 14px 14px 0 0;
+    }
+    .ph-hdr.p2 { background: #374151; }
+    .ph-hdr.p3 { background: #9CA3AF; }
+    .ph-arrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #D1D5DB;
+    }
+    .ph-body {
+      background: white;
+      padding: 18px 22px;
+      border-radius: 0 0 14px 14px;
+    }
+    .ph-body.p2, .ph-body.p3 { opacity: 0.65; }
+    .ph-spacer { background: transparent; }
+    .phase-num {
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+      color: rgba(255,255,255,0.18);
+      flex-shrink: 0;
+    }
+    .ph-hdr.p1 .phase-num { color: rgba(255,255,255,0.9); }
+    .phase-title-wrap { flex: 1; }
+    .phase-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.35;
+    }
+    .ph-hdr.p2 .phase-title,
+    .ph-hdr.p3 .phase-title { color: rgba(255,255,255,0.75); }
+    .phase-current-badge {
+      display: inline-block;
+      margin-top: 6px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 100px;
+      background: #F59E0B;
+      color: white;
+    }
+    .phase-desc {
+      font-size: 12px;
+      color: #6B7280;
+      line-height: 1.55;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .phase-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .phase-list li {
+      font-size: 12.5px;
+      color: #374151;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.4;
+    }
+    .phase-list li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #9CA3AF;
+    }
+    .init-name  { font-weight: 600; }
+    .init-desc  {
+      display: block;
+      font-size: 11px;
+      color: #9CA3AF;
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    /* ── 6. OKRs ── */
+    .okr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .okr-card {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+    .okr-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 14px;
+    }
+    .okr-badge {
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      color: white;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .okr-badge.v { background: #1D4ED8; }
+    .okr-badge.d { background: #059669; }
+    .okr-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #6B7280;
+      line-height: 1.3;
+    }
+    .okr-value {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0D1B2E;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .okr-track {
+      height: 7px;
+      background: #F1F5F9;
+      border-radius: 100px;
+      position: relative;
+      margin-bottom: 12px;
+    }
+    .okr-fill {
+      position: absolute;
+      top: 0; left: 0;
+      height: 100%;
+      border-radius: 100px;
+    }
+    .okr-fill.v { background: linear-gradient(90deg, #1D4ED8, #60A5FA); }
+    .okr-fill.d { background: linear-gradient(90deg, #059669, #34D399); }
+    .okr-cursor {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 13px; height: 13px;
+      border-radius: 50%;
+      border: 2.5px solid white;
+      box-shadow: 0 0 0 2px rgba(29,78,216,0.25);
+    }
+    .okr-cursor.v { background: #1D4ED8; box-shadow: 0 0 0 2px rgba(29,78,216,0.25); }
+    .okr-cursor.d { background: #059669; box-shadow: 0 0 0 2px rgba(5,150,105,0.25); }
+    .okr-q1-tick {
+      position: absolute;
+      top: -3px;
+      width: 2px;
+      height: 13px;
+      background: #F59E0B;
+      border-radius: 1px;
+    }
+    .okr-targets {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .okr-chip {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+    }
+    .okr-chip.q1 { background: #FEF3C7; color: #92400E; }
+    .okr-chip.fy.v { background: #DBEAFE; color: #1D4ED8; }
+    .okr-chip.fy.d { background: #D1FAE5; color: #065F46; }
+
+    /* ── 7. Roadmap ── */
+    .roadmap-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .roadmap-col {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.18s ease;
+    }
+    .roadmap-col:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .roadmap-header {
+      padding: 18px 22px 16px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .roadmap-horizon {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      margin-bottom: 2px;
+    }
+    .roadmap-period { font-size: 11px; font-weight: 500; }
+    .roadmap-col.now   .roadmap-horizon { color: #059669; }
+    .roadmap-col.now   .roadmap-period  { color: #6EE7B7; }
+    .roadmap-col.next  .roadmap-horizon { color: #1D4ED8; }
+    .roadmap-col.next  .roadmap-period  { color: #93C5FD; }
+    .roadmap-col.later .roadmap-horizon { color: #94A3B8; }
+    .roadmap-col.later .roadmap-period  { color: #CBD5E1; }
+    .roadmap-col.later { border: 1.5px dashed #E2E8F0; background: #FAFAFA; }
+    .roadmap-items {
+      list-style: none;
+      padding: 14px 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .roadmap-items li {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .roadmap-col.now   .roadmap-items li { color: #1F2937; }
+    .roadmap-col.next  .roadmap-items li { color: #374151; }
+    .roadmap-col.later .roadmap-items li { color: #9CA3AF; font-style: italic; }
+    .bet-dot { font-size: 11px; flex-shrink: 0; line-height: 1.6; }
+
+    /* ── Vision strip ── */
+    .vision-strip {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-left: 3px solid #1D4ED8;
+    }
+    .vision-text-wrap { flex: 1; }
+    .vision-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #9CA3AF;
+      margin-bottom: 6px;
+    }
+    .vision-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: #374151;
+      line-height: 1.6;
+    }
+    .vision-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1D4ED8;
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 8px 16px;
+      border: 1.5px solid #DBEAFE;
+      border-radius: 8px;
+      background: #EFF6FF;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+    .vision-link:hover { background: #DBEAFE; }
+    .vision-link svg { width: 12px; height: 12px; }
+
+    /* ── Section links ── */
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #6B7280;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+    .section-link:hover { color: #374151; }
+
+    /* ── Footer ── */
+    .footer {
+      background: white;
+      border-radius: 12px;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-left  { font-size: 12px; color: #6B7280; }
+    .footer-left strong { color: #374151; }
+    .footer-right { font-size: 11px; color: #D1D5DB; font-style: italic; }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- 1. Mission -->
+  <div class="mission">
+    <div class="eyebrow">Mission</div>
+    <div class="mission-text">Make carsales the default and most valuable place to complete a private vehicle deal</div>
+    <div class="mission-sub">Evolving from a product you pay through, to a platform you buy through</div>
+  </div>
+
+  <!-- 2. Vision strip -->
+  <div class="vision-strip">
+    <div class="vision-text-wrap">
+      <div class="vision-label">Vision</div>
+      <div class="vision-text">From payment to transaction platform to garage — carsales as the home for every private car, for every kilometre of ownership. Not just a safer way to pay, but a complete transaction layer that stays with buyers and sellers long after the keys change hands.</div>
+    </div>
+    <a class="vision-link" href="https://carsales.atlassian.net/wiki/spaces/NEXT/pages/4118020098/Vision+2030+Story" target="_blank">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Read the vision story
+    </a>
+  </div>
+
+  <!-- 3. Proof points -->
+  <div>
+    <div class="proof-row">
+      <div class="proof">
+        <div class="proof-val">$393M</div>
+        <div class="proof-lbl">Transacted since launch</div>
+      </div>
+      <div class="proof">
+        <div class="proof-val">18,800</div>
+        <div class="proof-lbl">Completed deals</div>
+      </div>
+      <div class="proof">
+        <div class="proof-val">NPS 77</div>
+        <div class="proof-lbl">For payment users</div>
+        <div class="proof-note">vs 46 for non-payment users</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Problems -->
+  <div>
+    <div class="eyebrow">Why we're not growing fast enough</div>
+    <div class="problems-grid">
+      <div class="problem">
+        <div class="problem-num">Problem 1</div>
+        <div class="problem-title">There isn't enough value to change behaviour</div>
+        <div class="problem-body">Bank transfer is familiar, free, and top of mind — not because it's better, but because it's already decided before users reach us. The product doesn't yet cover enough of what a private sale actually involves to feel like the obvious alternative.</div>
+      </div>
+      <div class="problem">
+        <div class="problem-num">Problem 2</div>
+        <div class="problem-title">The platform is built for leads, not transactions</div>
+        <div class="problem-body">The moments that matter — inspection, negotiation, handover — happen off-platform after enquiry. Buyers and sellers leave and don't come back. Payments is optional, not the default.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Strategic Bets -->
+  <div>
+    <div class="eyebrow">Strategic bets — FY27</div>
+    <div class="bets-grid">
+      <div class="bet-card val">
+        <div class="bet-header">
+          <div class="bet-icon">💎</div>
+          <div class="bet-name">Value</div>
+        </div>
+        <div class="bet-tagline">Give users a reason to stay (and come back) by making carsales the most valuable way to complete a private vehicle deal. Expand the product beyond payment to cover the full private sale — deposit, checkout, record of sale, registration transfer, handover.</div>
+      </div>
+      <div class="bet-card def">
+        <div class="bet-header">
+          <div class="bet-icon">🔵</div>
+          <div class="bet-name">Default</div>
+        </div>
+        <div class="bet-tagline">Evolve the carsales experience to stop users leaving the platform after enquiry. Make transaction the natural next step — not a separate product users have to find. The moment of commitment should happen on carsales, not off it.</div>
+      </div>
+      <div class="bet-card exp">
+        <div class="bet-header">
+          <div class="bet-icon">⚡</div>
+          <div class="bet-name">Expansion</div>
+        </div>
+        <div class="bet-tagline">Scale checkout across carsales — Instant Offer and dealer — then beyond it, to any private sale (marketplace-agnostic). Rails first, experience later; unlocked by Q2 work that lets other surfaces call our services.</div>
+        <div class="bet-parked-badge">Parked — Q2+</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Execute — Strategy phases -->
+  <div>
+    <div class="eyebrow">Execute — the private deal, end to end</div>
+    <div class="phases-grid">
+
+      <!-- Headers -->
+      <div class="ph-hdr p1">
+        <div class="phase-num">1</div>
+        <div class="phase-title-wrap">
+          <div class="phase-title">Build a valuable checkout beyond payment</div>
+          <span class="phase-current-badge">Current phase</span>
+        </div>
+      </div>
+      <div class="ph-arrow">→</div>
+      <div class="ph-hdr p2">
+        <div class="phase-num">2</div>
+        <div class="phase-title-wrap">
+          <div class="phase-title">Bring offline activity online</div>
+        </div>
+      </div>
+      <div class="ph-arrow">→</div>
+      <div class="ph-hdr p3">
+        <div class="phase-num">3</div>
+        <div class="phase-title-wrap">
+          <div class="phase-title">Evolve from enquiry to transaction</div>
+        </div>
+      </div>
+
+      <!-- Bodies -->
+      <div class="ph-body p1">
+        <div class="phase-desc">Give users a complete, high-value transaction experience — from deposit to handover.</div>
+        <ul class="phase-list">
+          <li>Checkout v2</li>
+          <li>Checkout without payment</li>
+          <li>Record of sale</li>
+          <li>Transfer of registration</li>
+          <li>3-step handover</li>
+          <li>Standalone non-refundable deposits</li>
+        </ul>
+      </div>
+      <div class="ph-spacer"></div>
+      <div class="ph-body p2">
+        <div class="phase-desc">Give buyers and sellers the tools to make a confident decision — before money moves.</div>
+        <ul class="phase-list">
+          <li>
+            <span class="init-name">Inspection &amp; test drive checklist</span>
+            <span class="init-desc">A guided in-app checklist for the physical visit — a carsales touchpoint at the highest-intent moment.</span>
+          </li>
+          <li>
+            <span class="init-name">PPSR check</span>
+            <span class="init-desc">Native vehicle history and encumbrance check surfaced before or during inspection.</span>
+          </li>
+          <li>
+            <span class="init-name">Fair price guidance</span>
+            <span class="init-desc">Market-based price range for the specific car, surfaced within the listing or offer context.</span>
+          </li>
+          <li>
+            <span class="init-name">Pre-purchase inspection booking</span>
+            <span class="init-desc">Third-party mechanic inspections bookable through carsales.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="ph-spacer"></div>
+      <div class="ph-body p3">
+        <div class="phase-desc">Make transaction the natural continuation of enquiry — not a separate product users have to find.</div>
+        <ul class="phase-list">
+          <li>Enquiry feeds into checkout</li>
+          <li>Merge Bello &amp; checkout</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 7. OKRs -->
+  <div>
+    <div class="eyebrow">OKRs FY27</div>
+    <div class="okr-grid">
+
+      <!-- KR1.1 — Market Penetration: 5.3% / 7% Q1 / 15% FY27 -->
+      <div class="okr-card">
+        <div class="okr-header">
+          <span class="okr-badge v">KR 1.1</span>
+          <span class="okr-name">Market Penetration</span>
+        </div>
+        <div class="okr-value">5.3%</div>
+        <div class="okr-track">
+          <!-- fill: 5.3/15 = 35.3% -->
+          <div class="okr-fill v" style="width:35.3%">
+            <div class="okr-cursor v" style="right:-6.5px;"></div>
+          </div>
+          <!-- Q1 tick: 7/15 = 46.7% -->
+          <div class="okr-q1-tick" style="left:46.7%;"></div>
+        </div>
+        <div class="okr-targets">
+          <span class="okr-chip q1">Q1: 7%</span>
+          <span class="okr-chip fy v">FY27: 15%</span>
+        </div>
+      </div>
+
+      <!-- KR1.2 — Total Transactions: 1,301 / 1,750 Q1 / 3,500 FY27 -->
+      <div class="okr-card">
+        <div class="okr-header">
+          <span class="okr-badge v">KR 1.2</span>
+          <span class="okr-name">Total Transactions (rolling 4w)</span>
+        </div>
+        <div class="okr-value">1,301</div>
+        <div class="okr-track">
+          <!-- fill: 1301/3500 = 37.2% -->
+          <div class="okr-fill v" style="width:37.2%">
+            <div class="okr-cursor v" style="right:-6.5px;"></div>
+          </div>
+          <!-- Q1 tick: 1750/3500 = 50% -->
+          <div class="okr-q1-tick" style="left:50%;"></div>
+        </div>
+        <div class="okr-targets">
+          <span class="okr-chip q1">Q1: 1,750</span>
+          <span class="okr-chip fy v">FY27: 3,500</span>
+        </div>
+      </div>
+
+      <!-- KR2.2 — Checkout Users: 15,998 / 22,000 Q1 / 63,000 FY27 -->
+      <div class="okr-card">
+        <div class="okr-header">
+          <span class="okr-badge d">KR 2.2</span>
+          <span class="okr-name">Checkout Users (rolling 4w)</span>
+        </div>
+        <div class="okr-value">15,998</div>
+        <div class="okr-track">
+          <!-- fill: 15998/63000 = 25.4% -->
+          <div class="okr-fill d" style="width:25.4%">
+            <div class="okr-cursor d" style="right:-6.5px;"></div>
+          </div>
+          <!-- Q1 tick: 22000/63000 = 34.9% -->
+          <div class="okr-q1-tick" style="left:34.9%;"></div>
+        </div>
+        <div class="okr-targets">
+          <span class="okr-chip q1">Q1: 22,000</span>
+          <span class="okr-chip fy d">FY27: 63,000</span>
+        </div>
+      </div>
+
+    </div>
+    <a class="section-link" href="https://carsalescom.sharepoint.com/:x:/r/teams/next/_layouts/15/doc.aspx?sourcedoc=%7B0d17b133-2cae-4bd4-8cfc-c14405c326fb%7D&action=edit" target="_blank">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Latest metrics update
+    </a>
+  </div>
+
+  <!-- 9. Roadmap -->
+  <div>
+    <div class="eyebrow">Roadmap</div>
+    <div class="roadmap-grid">
+
+      <div class="roadmap-col now">
+        <div class="roadmap-header">
+          <div class="roadmap-horizon">Now</div>
+          <div class="roadmap-period">In progress — Q1 FY27</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><span class="bet-dot">💎</span>Record of Sale</li>
+          <li><span class="bet-dot">💎</span>Transfer of Registration PDF</li>
+          <li><span class="bet-dot">💎</span>The Deal Sheet (Checkout v2)</li>
+          <li><span class="bet-dot">💎</span>Biometrics</li>
+          <li><span class="bet-dot">💎</span>Interstate purchasing</li>
+          <li><span class="bet-dot">💎</span>3-Step Handover</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-col next">
+        <div class="roadmap-header">
+          <div class="roadmap-horizon">Next</div>
+          <div class="roadmap-period">Planned — Q2–Q3 FY27</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><span class="bet-dot">💎</span>Standalone Deposits</li>
+          <li><span class="bet-dot">💎</span>Checkout Without Payment</li>
+          <li><span class="bet-dot">💎</span>Vehicle Inspection guidance</li>
+          <li><span class="bet-dot">💎</span>Test Drive guidance</li>
+          <li><span class="bet-dot">💎</span>Improve ID pass rate</li>
+          <li><span class="bet-dot">🔵</span>Persistent Deal Placement</li>
+        </ul>
+      </div>
+
+      <div class="roadmap-col later">
+        <div class="roadmap-header">
+          <div class="roadmap-horizon">Later</div>
+          <div class="roadmap-period">Horizon — not yet committed</div>
+        </div>
+        <ul class="roadmap-items">
+          <li>Checkout for dealer consumers</li>
+          <li>Instant Offer payments</li>
+          <li>Marketplace-agnostic checkout</li>
+          <li>Buying on the driveway</li>
+          <li>"Selling your car" experience</li>
+          <li>Apple Pay / Google Pay</li>
+          <li>Virtual vehicle tour</li>
+          <li>Active Enquiries</li>
+          <li>Global Wallet</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-right">Updated 26 June 2026 · Internal use</div>
+  </div>
+
+</div>
+</body>
+</html>
