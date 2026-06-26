@@ -428,6 +428,214 @@
     .vision-link:hover { background: #DBEAFE; }
     .vision-link svg { width: 12px; height: 12px; }
 
+    /* ── Customer strip ── */
+    .customer-strip {
+      background: white;
+      border-radius: 14px;
+      padding: 22px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      border-left: 3px solid #F59E0B;
+    }
+    .customer-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #92400E;
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 8px 16px;
+      border: 1.5px solid #FDE68A;
+      border-radius: 8px;
+      background: #FFFBEB;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+      cursor: pointer;
+    }
+    .customer-link:hover { background: #FEF3C7; }
+
+    /* ── Modal ── */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(13, 27, 46, 0.55);
+      backdrop-filter: blur(3px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .modal-backdrop.open { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 20px;
+      max-width: 560px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
+    }
+    .modal-header {
+      background: linear-gradient(135deg, #78350F 0%, #D97706 100%);
+      border-radius: 20px 20px 0 0;
+      padding: 32px 36px 28px;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      color: white;
+      font-size: 16px;
+      line-height: 1;
+      transition: background 0.15s;
+    }
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+    .modal-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+    .modal-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      font-style: italic;
+    }
+    .modal-body { padding: 28px 36px 32px; }
+    .modal-profile {
+      background: #FFFBEB;
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-size: 13px;
+      color: #78350F;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+    .modal-section-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #9CA3AF;
+      margin-bottom: 12px;
+    }
+    .modal-needs {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .modal-need {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .modal-need-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .modal-need-text {}
+    .modal-need-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 2px;
+    }
+    .modal-need-desc {
+      font-size: 12.5px;
+      color: #6B7280;
+      line-height: 1.55;
+    }
+    .modal-divider {
+      border: none;
+      border-top: 1px solid #F3F4F6;
+      margin: 20px 0;
+    }
+    .modal-behaviours {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .modal-behaviour {
+      font-size: 12.5px;
+      color: #374151;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .modal-behaviour::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: #D97706;
+    }
+    .modal-archetype-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .modal-archetype-name {
+      font-size: 22px;
+      font-weight: 800;
+      color: #111827;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+    .modal-archetype-sub {
+      font-size: 12px;
+      font-weight: 600;
+      color: #9CA3AF;
+      margin-top: 3px;
+    }
+    .modal-archetype-stats {
+      display: flex;
+      gap: 16px;
+    }
+    .modal-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .modal-stat-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: #059669;
+      letter-spacing: -0.3px;
+      line-height: 1;
+    }
+    .modal-stat-lbl {
+      font-size: 10px;
+      color: #9CA3AF;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .modal-archetype-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #D97706;
+      text-decoration: none;
+      margin-top: 18px;
+    }
+    .modal-archetype-link:hover { color: #92400E; }
+
     /* ── Section links ── */
     .section-link {
       display: inline-flex;
@@ -477,7 +685,19 @@
     </a>
   </div>
 
-  <!-- 3. Proof points -->
+  <!-- 3. Customer strip -->
+  <div class="customer-strip">
+    <div class="vision-text-wrap">
+      <div class="vision-label" style="color:#D97706;">Who we're building for</div>
+      <div class="vision-text">Private vehicle buyers and sellers — cautious, going it mostly alone, who want the deal to feel safe, guided, and in control from first message to handover.</div>
+    </div>
+    <button class="customer-link" onclick="document.getElementById('icp-modal').classList.add('open')">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      Meet our ideal customer
+    </button>
+  </div>
+
+  <!-- 4. Proof points -->
   <div>
     <div class="proof-row">
       <div class="proof">
@@ -753,5 +973,82 @@
   </div>
 
 </div>
+
+<!-- Debbie ICP Modal -->
+<div class="modal-backdrop" id="icp-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+    <div class="modal-header">
+      <button class="modal-close" onclick="document.getElementById('icp-modal').classList.remove('open')">✕</button>
+      <div class="modal-name">Debbie</div>
+      <div class="modal-tagline">She doesn't like buying and selling cars…</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-profile">
+        31, Melbourne. Selling her car and buying a new one for around $20K. Has some support, but mostly going it alone.
+      </div>
+
+      <div class="modal-section-title">All Debbie needs is…</div>
+      <div class="modal-needs">
+        <div class="modal-need">
+          <div class="modal-need-icon">🛡️</div>
+          <div class="modal-need-text">
+            <div class="modal-need-title">Trust &amp; control</div>
+            <div class="modal-need-desc">Wants to feel safe, in control, and confident — especially around payment and handover. Avoids anything that feels scammy or unclear.</div>
+          </div>
+        </div>
+        <div class="modal-need">
+          <div class="modal-need-icon">🧭</div>
+          <div class="modal-need-text">
+            <div class="modal-need-title">Clear, guided steps</div>
+            <div class="modal-need-desc">Doesn't want to research or get things wrong. Wants the platform to lead her through gently, step by step, with timely nudges.</div>
+          </div>
+        </div>
+        <div class="modal-need">
+          <div class="modal-need-icon">💻</div>
+          <div class="modal-need-text">
+            <div class="modal-need-title">Simple, digital process</div>
+            <div class="modal-need-desc">Loves low-hassle experiences. But behind every digital button, she wants to know there's real security and human support if she needs it.</div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="modal-divider">
+
+      <div class="modal-section-title">Debbie's archetype</div>
+      <div class="modal-archetype-header">
+        <div>
+          <div class="modal-archetype-name">Cautious</div>
+          <div class="modal-archetype-sub">Reserved, Risk Averse</div>
+        </div>
+        <div class="modal-archetype-stats">
+          <div class="modal-stat"><span class="modal-stat-val">27%</span><span class="modal-stat-lbl">Overall users</span></div>
+          <div class="modal-stat"><span class="modal-stat-val">28%</span><span class="modal-stat-lbl">Sellers</span></div>
+          <div class="modal-stat"><span class="modal-stat-val">25%</span><span class="modal-stat-lbl">Buyers</span></div>
+        </div>
+      </div>
+
+      <div class="modal-behaviours" style="margin-top:14px;">
+        <div class="modal-behaviour">Seeks legitimacy — checks tone and "vibe" in listings and messages</div>
+        <div class="modal-behaviour">Minimises interactions with strangers</div>
+        <div class="modal-behaviour">Does things the right way to avoid risks</div>
+        <div class="modal-behaviour">Values clear steps and control over the process</div>
+        <div class="modal-behaviour">Wants to know the payment is safe and protected</div>
+        <div class="modal-behaviour">Desires a smooth, secure, and stress-free handover</div>
+      </div>
+
+      <a class="modal-archetype-link" href="https://miro.com/app/board/uXjVGZ40Ff0=/?moveToWidget=3458764656438471795&cot=14" target="_blank">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Read more about our cautious archetype
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') document.getElementById('icp-modal').classList.remove('open');
+  });
+</script>
+
 </body>
 </html>
